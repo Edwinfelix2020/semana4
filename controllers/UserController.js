@@ -2,6 +2,7 @@ const config = require('../secret/config.js');
 const db = require('../models');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
+const token = require('../services/token')
 
 exports.signin = async(req, res, next) => {
     try{
@@ -9,15 +10,7 @@ exports.signin = async(req, res, next) => {
         if(user){
             const passwordIsValid = bcrypt.compareSync(req.body.password , user.password);
             if(passwordIsValid){
-                const token = jwt.sign({
-                    id: user.id,
-                    name: user.name,
-                    email: user.email,
-                    rol: user.rol
-                },'config.secret', {
-                    expiresIn: 86400,
-                }
-                );
+                const token = token.encode(user);
                 res.status(200).send({    
                     auth: true,
                     accessToken: token
