@@ -1,10 +1,7 @@
-const routerx = require('express-promise-router');
-const categoriaRouter = require('./articulo');
+const router = require('express').Router();
+const apiRouterUser = require('./api/users.js');
 
 
-
-const router = routerx();
-
-router.use('/articulo', articuloRouter);
+router.use('/usuario', apiRouterUser);
 
 module.exports = router;

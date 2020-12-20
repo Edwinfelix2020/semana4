@@ -8,6 +8,6 @@ router.get('/list', auth.verificarVendedor, userController.list);
 router.post('/register', auth.verificarAdministrador, userController.register);
 router.put('/update', auth.verificarAdministrador, userController.update);
 
-router.post('/signin', userController.signin);
+router.post('/login', userController.login);
 
 module.exports = router;

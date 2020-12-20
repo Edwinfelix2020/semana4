@@ -2,15 +2,15 @@ const config = require('../secret/config.js');
 const db = require('../models');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
-const token = require('../services/token')
+const tokenServices = require('../services/token')
 
-exports.signin = async(req, res, next) => {
+exports.login = async(req, res, next) => {
     try{
         const user = await db.user.findOne({where: {email: req.body.email}});
         if(user){
             const passwordIsValid = bcrypt.compareSync(req.body.password , user.password);
             if(passwordIsValid){
-                const token = token.encode(user);
+                const token = await tokenServices.encode(user);
                 res.status(200).send({    
                     auth: true,
                     accessToken: token

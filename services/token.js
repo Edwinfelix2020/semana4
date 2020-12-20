@@ -4,13 +4,13 @@ const models = require('../models');
 const checkToken = async(token) =>{
     let localID = null;
     try {
-        const { id }= token.decode(token);
+        const { id }= await token.decode(token);
         localID = id;
     }catch (errror) {
 
     }
     const user = await models.user.findOne({where:{
-        id: id,
+        id: localID,
         estado: 1
     }})   
     if(user){
