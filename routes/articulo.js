@@ -8,5 +8,11 @@ const router = routerx();
 
 router.get('/list', articuloController.list);
 
+router.post('/add', auth.verifyUsuario, articuloController.add); // usa middlewere para verificar que tenga rol admin
+router.put('/update',auth.verifyUsuario, articuloController.update);
+
+router.put('/activate',auth.verifyUsuario, articuloController.activate);
+router.put('/deactivate',auth.verifyUsuario, articuloController.deactivate);
+
 
 module.exports = router;

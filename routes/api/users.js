@@ -1,13 +1,14 @@
-const router = require('express').Router()
-const userController = require('../../controllers/UserController.js');
-const auth = require('../../middlewares/auth');
+const routerx = require('express-promise-router');
+const userController = require('../controllers/UserController.js');
+const auth = require('../middlewares/auth');
+const router = routerx();
 
 
 //api/user/
-router.get('/list', auth.verificarVendedor, userController.list);
-router.post('/register', auth.verificarAdministrador, userController.register);
-router.put('/update', auth.verificarAdministrador, userController.update);
-
-router.post('/login', userController.login);
+router.get('/list',auth.verifyUsuario, userController.list);
+router.post('/login', userController.login); 
+router.post('/register', auth.verifyUsuario, userController.register);
+router.put('/update',auth.verifyUsuario, userController.update);
 
 module.exports = router;
+
