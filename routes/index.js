@@ -1,4 +1,4 @@
-const apiRouterUser = require('./api/users.js');
+const apiRouterUser = require('./users.js');
 const routerx = require('express-promise-router');
 const apiRouterCategoria =require('./categoria');
 const apiRouterArticulo = require('./articulo');
